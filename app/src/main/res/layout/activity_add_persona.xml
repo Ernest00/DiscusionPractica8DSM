@@ -38,25 +38,29 @@
             android:hint="Digite DUI" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtFecha"
+        android:layout_height="wrap_content"
+        >
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Digite fecha de nacimiento" />
+            android:layout_height="20dp"
+            android:text="Seleccione fecha de Nacimiento"/>
+
+        <TextView
+            android:id="@+id/tvfechaNacimient"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="01/01/2001"
+            android:textSize="16dp"
+            android:gravity="center_vertical">
+        </TextView>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
-
 <TextView
     android:layout_width="match_parent"
     android:layout_height="20dp"

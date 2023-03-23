@@ -1,6 +1,6 @@
 package sv.edu.udb.guia08app
 
-import android.nfc.Tag
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayoutStates.TAG
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import sv.edu.udb.guia08app.datos.Persona
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -22,6 +23,7 @@ class AddPersonaActivity : AppCompatActivity() {
     private var edtGenero: EditText? = null
     private var edtPeso: EditText? = null
     private var edtAltura: EditText? = null
+    private var tvFechaNacimiento: TextView? = null
     private var key = ""
     private var nombre = ""
     private var dui = ""
@@ -36,15 +38,15 @@ class AddPersonaActivity : AppCompatActivity() {
     }
 
     private fun inicializar() {
+
         edtNombre = findViewById<EditText>(R.id.edtNombre)
         edtDUI = findViewById<EditText>(R.id.edtDUI)
-        edtFecha = findViewById<EditText>(R.id.edtFecha)
         edtAltura = findViewById<EditText>(R.id.edtAltura)
         edtPeso = findViewById<EditText>(R.id.edtPeso)
+        tvFechaNacimiento = findViewById<TextView>(R.id.tvfechaNacimient)
 
         val edtNombre = findViewById<EditText>(R.id.edtNombre)
         val edtDUI = findViewById<EditText>(R.id.edtDUI)
-        val edtFecha = findViewById<EditText>(R.id.edtFecha)
         val edtAltura = findViewById<EditText>(R.id.edtAltura)
         val edtPeso = findViewById<EditText>(R.id.edtPeso)
 
@@ -53,6 +55,20 @@ class AddPersonaActivity : AppCompatActivity() {
         var genres = arrayOf("Seleccione un genero","Masculino", "Femenino")
         var adaptador:ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_spinner_item,genres)
         spinnerGeneros?.adapter=adaptador
+
+        //calendario
+        val c= Calendar.getInstance()
+        val year= c.get(Calendar.YEAR)
+        val month= c.get(Calendar.MONTH)
+        val day= c.get(Calendar.DAY_OF_MONTH)
+
+        tvFechaNacimiento?.setOnClickListener {
+            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                tvFechaNacimiento?.setText(""+ mDay +"/"+(mMonth+1)+"/"+mYear)
+            }, year , month, day)
+
+            dpd.show()
+        }
 
         // Obtención de datos que envia actividad anterior
         val datos: Bundle? = intent.getExtras()
@@ -74,7 +90,7 @@ class AddPersonaActivity : AppCompatActivity() {
         }
 
         if (datos != null) {
-            edtFecha.setText(intent.getStringExtra("fechaNacimiento").toString())
+            tvFechaNacimiento?.setText(intent.getStringExtra("fechaNacimiento").toString())
         }
         if (datos != null) {
             edtDUI.setText(intent.getStringExtra("dui").toString())
@@ -88,13 +104,9 @@ class AddPersonaActivity : AppCompatActivity() {
 
         if (datos != null) {
             edtAltura.setText(intent.getStringExtra("altura").toString())
-            Log.i(TAG, "Accediendo 1")
-            Log.i(TAG, datos.toString())
         }
         if (datos != null) {
             edtPeso.setText(intent.getStringExtra("peso"))
-            Log.i(TAG, "Accediendo 2")
-            Log.i(TAG, datos.toString())
         }
 
     }
@@ -110,7 +122,7 @@ class AddPersonaActivity : AppCompatActivity() {
 
         val altura: Double = edtAltura?.text.toString().toDouble()
         val peso: Double = edtPeso?.text.toString().toDouble()
-        val fechaNacimiento: String = edtFecha?.text.toString()
+        val fechaNacimiento: String = tvFechaNacimiento?.text.toString()
         val nombre: String = edtNombre?.text.toString()
         val dui: String = edtDUI?.text.toString()
 
