@@ -8,7 +8,7 @@ class Persona {
 
     var dui: String? = null
     var nombre: String? = null
-    var fechaNacimiento : String? = "";
+    var fechaNacimiento : String? = "1/1/2001";
     var genero: String? = null
     var peso: Double? = 0.0
     var altura: Double? = 0.0

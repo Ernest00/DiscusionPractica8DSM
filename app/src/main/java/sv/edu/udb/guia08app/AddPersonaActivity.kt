@@ -91,7 +91,7 @@ class AddPersonaActivity : AppCompatActivity() {
 
         if (datos != null) {
             tvFechaNacimiento?.setText(intent.getStringExtra("fechaNacimiento").toString())
-        }else{ tvFechaNacimiento?.setText("1/1/2001")}
+        }else{ tvFechaNacimiento?.setText("1/1/2001").toString()}
         if (datos != null) {
             edtDUI.setText(intent.getStringExtra("dui").toString())
         }
